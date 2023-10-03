@@ -422,6 +422,7 @@ class RecurrentActorCriticPolicy(ActorCriticPolicy):
             else:
                 # Actions could be on arbitrary scale, so clip the actions to avoid
                 # out of bound error (e.g. if sampling from a Gaussian distribution)
+                actions = self.unscale_action(actions)
                 actions = np.clip(actions, self.action_space.low, self.action_space.high)
 
         # Remove batch dimension if needed
